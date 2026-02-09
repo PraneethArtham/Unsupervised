@@ -11,23 +11,19 @@ import os
 
 @st.cache_resource
 def load_model():
-    if not os.path.exists("kmeans_model.pkl"):
-        st.error("Model file missing.")
-        st.stop()
-    return joblib.load("kmeans_model.pkl")
-
+    return joblib.load("unsupervised/kmeans_model.pkl")
 
 @st.cache_resource
 def load_scaler():
-    return joblib.load("scaler.pkl")
+    return joblib.load("unsupervised/scaler.pkl")
 
 @st.cache_data
 def load_data():
-    return pd.read_csv("Mall_customers.csv")
+    return pd.read_csv("unsupervised/Mall_customers.csv")
 
 @st.cache_data
 def load_clustered():
-    return pd.read_csv("clustered_mall_customers.csv")
+    return pd.read_csv("unsupervised/clustered_mall_customers.csv")
 
 
 model = load_model()
@@ -86,6 +82,7 @@ if st.button("Predict Cluster"):
     )
 
     st.plotly_chart(fig, use_container_width=True)
+
 
 
 
