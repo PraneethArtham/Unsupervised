@@ -7,9 +7,15 @@ import plotly.express as px
 st.set_page_config(page_title="Mall Customer Clustering", layout="wide")
 
 # Load resources
+import os
+
 @st.cache_resource
 def load_model():
+    if not os.path.exists("kmeans_model.pkl"):
+        st.error("Model file missing. Upload kmeans_model.pkl to repo.")
+        st.stop()
     return joblib.load("kmeans_model.pkl")
+
 
 @st.cache_resource
 def load_scaler():
@@ -79,3 +85,4 @@ if st.button("Predict Cluster"):
     )
 
     st.plotly_chart(fig, use_container_width=True)
+
